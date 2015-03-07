@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UA7-y0-tWN" customClass="OBGradientView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baboon" translatesAutoresizingMaskIntoConstraints="NO" id="4te-m7-qfd">
+                                        <rect key="frame" x="172" y="172" width="256" height="256"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="256" id="6S0-qx-92E"/>
+                                            <constraint firstAttribute="width" constant="256" id="t2G-x0-3zw"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="4te-m7-qfd" secondAttribute="centerY" id="2SW-xx-hef"/>
+                                    <constraint firstAttribute="centerX" secondItem="4te-m7-qfd" secondAttribute="centerX" id="eK4-RJ-43S"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="UA7-y0-tWN" secondAttribute="trailing" id="Oe9-oa-51x"/>
+                            <constraint firstItem="UA7-y0-tWN" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="PxV-vv-JAu"/>
+                            <constraint firstItem="UA7-y0-tWN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="eUW-O2-5Ee"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="UA7-y0-tWN" secondAttribute="bottom" id="wf2-G4-hbV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gradientView" destination="UA7-y0-tWN" id="cON-0P-FkS"/>
+                        <outlet property="imageView" destination="4te-m7-qfd" id="nLz-aB-OdF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="baboon" width="512" height="512"/>
+    </resources>
+</document>

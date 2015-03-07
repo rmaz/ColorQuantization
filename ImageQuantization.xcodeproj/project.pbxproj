@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6C9887F61AA8DA7600641FA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9887F51AA8DA7600641FA6 /* main.m */; };
+		6C9887F91AA8DA7600641FA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9887F81AA8DA7600641FA6 /* AppDelegate.m */; };
+		6C9887FC1AA8DA7600641FA6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9887FB1AA8DA7600641FA6 /* ViewController.m */; };
+		6C9887FF1AA8DA7600641FA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C9887FD1AA8DA7600641FA6 /* Main.storyboard */; };
+		6C9888011AA8DA7600641FA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C9888001AA8DA7600641FA6 /* Images.xcassets */; };
+		6C9888041AA8DA7600641FA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C9888021AA8DA7600641FA6 /* LaunchScreen.xib */; };
+		6C9888101AA8DA7600641FA6 /* ImageQuantizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C98880F1AA8DA7600641FA6 /* ImageQuantizationTests.m */; };
+		6C98881B1AA8DA9500641FA6 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C98881A1AA8DA9500641FA6 /* OBGradientView.m */; };
+		6C98881E1AA8DB6F00641FA6 /* ColorQuantizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C98881D1AA8DB6F00641FA6 /* ColorQuantizer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6C98880A1AA8DA7600641FA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C9887E81AA8DA7600641FA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C9887EF1AA8DA7600641FA6;
+			remoteInfo = ImageQuantization;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6C9887F01AA8DA7600641FA6 /* ImageQuantization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageQuantization.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C9887F41AA8DA7600641FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C9887F51AA8DA7600641FA6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6C9887F71AA8DA7600641FA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6C9887F81AA8DA7600641FA6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6C9887FA1AA8DA7600641FA6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6C9887FB1AA8DA7600641FA6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6C9887FE1AA8DA7600641FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6C9888001AA8DA7600641FA6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6C9888031AA8DA7600641FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		6C9888091AA8DA7600641FA6 /* ImageQuantizationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageQuantizationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C98880E1AA8DA7600641FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C98880F1AA8DA7600641FA6 /* ImageQuantizationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageQuantizationTests.m; sourceTree = "<group>"; };
+		6C9888191AA8DA9500641FA6 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
+		6C98881A1AA8DA9500641FA6 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
+		6C98881C1AA8DB6F00641FA6 /* ColorQuantizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorQuantizer.h; sourceTree = "<group>"; };
+		6C98881D1AA8DB6F00641FA6 /* ColorQuantizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorQuantizer.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6C9887ED1AA8DA7600641FA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C9888061AA8DA7600641FA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6C9887E71AA8DA7600641FA6 = {
+			isa = PBXGroup;
+			children = (
+				6C9887F21AA8DA7600641FA6 /* ImageQuantization */,
+				6C98880C1AA8DA7600641FA6 /* ImageQuantizationTests */,
+				6C9887F11AA8DA7600641FA6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6C9887F11AA8DA7600641FA6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6C9887F01AA8DA7600641FA6 /* ImageQuantization.app */,
+				6C9888091AA8DA7600641FA6 /* ImageQuantizationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6C9887F21AA8DA7600641FA6 /* ImageQuantization */ = {
+			isa = PBXGroup;
+			children = (
+				6C9888191AA8DA9500641FA6 /* OBGradientView.h */,
+				6C98881A1AA8DA9500641FA6 /* OBGradientView.m */,
+				6C98881C1AA8DB6F00641FA6 /* ColorQuantizer.h */,
+				6C98881D1AA8DB6F00641FA6 /* ColorQuantizer.m */,
+				6C9887F71AA8DA7600641FA6 /* AppDelegate.h */,
+				6C9887F81AA8DA7600641FA6 /* AppDelegate.m */,
+				6C9887FA1AA8DA7600641FA6 /* ViewController.h */,
+				6C9887FB1AA8DA7600641FA6 /* ViewController.m */,
+				6C9887FD1AA8DA7600641FA6 /* Main.storyboard */,
+				6C9888001AA8DA7600641FA6 /* Images.xcassets */,
+				6C9888021AA8DA7600641FA6 /* LaunchScreen.xib */,
+				6C9887F31AA8DA7600641FA6 /* Supporting Files */,
+			);
+			path = ImageQuantization;
+			sourceTree = "<group>";
+		};
+		6C9887F31AA8DA7600641FA6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6C9887F41AA8DA7600641FA6 /* Info.plist */,
+				6C9887F51AA8DA7600641FA6 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6C98880C1AA8DA7600641FA6 /* ImageQuantizationTests */ = {
+			isa = PBXGroup;
+			children = (
+				6C98880F1AA8DA7600641FA6 /* ImageQuantizationTests.m */,
+				6C98880D1AA8DA7600641FA6 /* Supporting Files */,
+			);
+			path = ImageQuantizationTests;
+			sourceTree = "<group>";
+		};
+		6C98880D1AA8DA7600641FA6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6C98880E1AA8DA7600641FA6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6C9887EF1AA8DA7600641FA6 /* ImageQuantization */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C9888131AA8DA7600641FA6 /* Build configuration list for PBXNativeTarget "ImageQuantization" */;
+			buildPhases = (
+				6C9887EC1AA8DA7600641FA6 /* Sources */,
+				6C9887ED1AA8DA7600641FA6 /* Frameworks */,
+				6C9887EE1AA8DA7600641FA6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageQuantization;
+			productName = ImageQuantization;
+			productReference = 6C9887F01AA8DA7600641FA6 /* ImageQuantization.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6C9888081AA8DA7600641FA6 /* ImageQuantizationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C9888161AA8DA7600641FA6 /* Build configuration list for PBXNativeTarget "ImageQuantizationTests" */;
+			buildPhases = (
+				6C9888051AA8DA7600641FA6 /* Sources */,
+				6C9888061AA8DA7600641FA6 /* Frameworks */,
+				6C9888071AA8DA7600641FA6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6C98880B1AA8DA7600641FA6 /* PBXTargetDependency */,
+			);
+			name = ImageQuantizationTests;
+			productName = ImageQuantizationTests;
+			productReference = 6C9888091AA8DA7600641FA6 /* ImageQuantizationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6C9887E81AA8DA7600641FA6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "r-n-l-d";
+				TargetAttributes = {
+					6C9887EF1AA8DA7600641FA6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					6C9888081AA8DA7600641FA6 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 6C9887EF1AA8DA7600641FA6;
+					};
+				};
+			};
+			buildConfigurationList = 6C9887EB1AA8DA7600641FA6 /* Build configuration list for PBXProject "ImageQuantization" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6C9887E71AA8DA7600641FA6;
+			productRefGroup = 6C9887F11AA8DA7600641FA6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6C9887EF1AA8DA7600641FA6 /* ImageQuantization */,
+				6C9888081AA8DA7600641FA6 /* ImageQuantizationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6C9887EE1AA8DA7600641FA6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C9887FF1AA8DA7600641FA6 /* Main.storyboard in Resources */,
+				6C9888041AA8DA7600641FA6 /* LaunchScreen.xib in Resources */,
+				6C9888011AA8DA7600641FA6 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C9888071AA8DA7600641FA6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6C9887EC1AA8DA7600641FA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C98881E1AA8DB6F00641FA6 /* ColorQuantizer.m in Sources */,
+				6C9887FC1AA8DA7600641FA6 /* ViewController.m in Sources */,
+				6C98881B1AA8DA9500641FA6 /* OBGradientView.m in Sources */,
+				6C9887F91AA8DA7600641FA6 /* AppDelegate.m in Sources */,
+				6C9887F61AA8DA7600641FA6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C9888051AA8DA7600641FA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C9888101AA8DA7600641FA6 /* ImageQuantizationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6C98880B1AA8DA7600641FA6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C9887EF1AA8DA7600641FA6 /* ImageQuantization */;
+			targetProxy = 6C98880A1AA8DA7600641FA6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6C9887FD1AA8DA7600641FA6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C9887FE1AA8DA7600641FA6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6C9888021AA8DA7600641FA6 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C9888031AA8DA7600641FA6 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6C9888111AA8DA7600641FA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6C9888121AA8DA7600641FA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6C9888141AA8DA7600641FA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ImageQuantization/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6C9888151AA8DA7600641FA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ImageQuantization/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6C9888171AA8DA7600641FA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ImageQuantizationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageQuantization.app/ImageQuantization";
+			};
+			name = Debug;
+		};
+		6C9888181AA8DA7600641FA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ImageQuantizationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageQuantization.app/ImageQuantization";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6C9887EB1AA8DA7600641FA6 /* Build configuration list for PBXProject "ImageQuantization" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C9888111AA8DA7600641FA6 /* Debug */,
+				6C9888121AA8DA7600641FA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6C9888131AA8DA7600641FA6 /* Build configuration list for PBXNativeTarget "ImageQuantization" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C9888141AA8DA7600641FA6 /* Debug */,
+				6C9888151AA8DA7600641FA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6C9888161AA8DA7600641FA6 /* Build configuration list for PBXNativeTarget "ImageQuantizationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C9888171AA8DA7600641FA6 /* Debug */,
+				6C9888181AA8DA7600641FA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6C9887E81AA8DA7600641FA6 /* Project object */;
+}
