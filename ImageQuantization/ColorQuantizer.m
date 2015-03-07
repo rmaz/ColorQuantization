@@ -8,13 +8,14 @@
 #pragma mark - Constants
 
 static const uint16_t kMaxColors = 0x1000;
-static const uint16_t kMinPeakDistance = 100;
+static const int kMinPeakDistance = 50;
+static const int kMinEdgeDistance = 50;
 static const CGSize kImageSize = { 256, 256 };
 
 #define PACK_PIXEL(bytePtr) ( ((uint16_t)(bytePtr[2] & 0xf0) << 4) + (bytePtr[1] & 0xf0) + (bytePtr[0] >> 4) )
-#define UNPACK_RED(index)   ((index & 0xf00) >> 4)
-#define UNPACK_GREEN(index) (index & 0xf0)
-#define UNPACK_BLUE(index)  ((index & 0x0f) << 4)
+#define UNPACK_RED(index)   ((index & 0x0f00) >> 4)
+#define UNPACK_GREEN(index)  (index & 0x00f0)
+#define UNPACK_BLUE(index)  ((index & 0x000f) << 4)
 
 #pragma mark - Init
 
@@ -78,22 +79,36 @@ static const CGSize kImageSize = { 256, 256 };
 
 - (NSArray *)dominantColorsInHistogram:(uint16_t *)histogram length:(uint16_t)length
 {
-    NSRange range = NSMakeRange(0, length);
-    uint16_t maxInd = [self biggestIndexInHistogram:histogram range:range];
-    uint16_t leftInd = maxInd > kMinPeakDistance ? maxInd - kMinPeakDistance : 0;
-    uint16_t rightInd = maxInd + kMinPeakDistance < length ? maxInd + kMinPeakDistance : length - 1;
-    bzero(&histogram[leftInd], (rightInd - leftInd) * sizeof(histogram[0]));
-    uint16_t secondMax = [self biggestIndexInHistogram:histogram range:range];
+    uint16_t maxInd = [self biggestIndexInHistogram:histogram length:length];
+    uint16_t secondInd = [self biggestIndexInHistogram:histogram length:length distantFromColor:maxInd];
 
-    return @[ [self colorFromIndex:maxInd], [self colorFromIndex:secondMax] ];
+    return @[ [self colorFromIndex:maxInd], [self colorFromIndex:secondInd] ];
 }
 
-- (uint16_t)biggestIndexInHistogram:(uint16_t *)histogram range:(NSRange)range
+- (uint16_t)biggestIndexInHistogram:(uint16_t *)histogram length:(uint16_t)length
 {
     uint16_t maxVal = 0;
     uint16_t maxInd = 0;
-    for (uint16_t i = range.location; i < NSMaxRange(range); i++) {
-        if (histogram[i] > maxVal) {
+    for (uint16_t i = 0; i < length; i++) {
+        if (histogram[i] > maxVal &&
+            [self distanceFromBlack:i] > kMinEdgeDistance &&
+            [self distanceFromWhite:i] > kMinEdgeDistance) {
+            maxVal = histogram[i];
+            maxInd = i;
+        }
+    }
+    return maxInd;
+}
+
+- (uint16_t)biggestIndexInHistogram:(uint16_t *)histogram length:(uint16_t)length distantFromColor:(uint16_t)color
+{
+    uint16_t maxVal = 0;
+    uint16_t maxInd = 0;
+    for (uint16_t i = 0; i < length; i++) {
+        if (histogram[i] > maxVal &&
+            [self distanceFromBlack:i] > kMinEdgeDistance &&
+            [self distanceFromWhite:i] > kMinEdgeDistance &&
+            [self distanceFromColor:i toColor:color] > kMinPeakDistance) {
             maxVal = histogram[i];
             maxInd = i;
         }
@@ -104,6 +119,23 @@ static const CGSize kImageSize = { 256, 256 };
 - (UIColor *)colorFromIndex:(uint16_t)index
 {
     return [UIColor colorWithRed:UNPACK_RED(index) / 255.0 green:UNPACK_GREEN(index) / 255.0 blue:UNPACK_BLUE(index) / 255.0 alpha:1];
+}
+
+- (int)distanceFromBlack:(uint16_t)index
+{
+    return UNPACK_RED(index) + UNPACK_GREEN(index) + UNPACK_BLUE(index);
+}
+
+- (int)distanceFromWhite:(uint16_t)index
+{
+    return 255 - UNPACK_RED(index) + 255 - UNPACK_GREEN(index) + 255 - UNPACK_BLUE(index);
+}
+
+- (int)distanceFromColor:(uint16_t)color1 toColor:(uint16_t)color2
+{
+    return abs((int)UNPACK_RED(color1)   - UNPACK_RED(color2)) +
+           abs((int)UNPACK_GREEN(color1) - UNPACK_GREEN(color2)) +
+           abs((int)UNPACK_BLUE(color1)  - UNPACK_BLUE(color2));
 }
 
 @end
