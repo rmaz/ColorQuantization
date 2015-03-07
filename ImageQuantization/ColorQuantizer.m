@@ -1,6 +1,6 @@
 #import "ColorQuantizer.h"
 
-#define MAX_COLORS 0x0fff
+#define MAX_COLORS 0x1000
 
 @implementation ColorQuantizer
 {
@@ -9,39 +9,53 @@
 
 #pragma mark - Constants
 
-static const uint16_t kMinPeakDistance = 50;
+static const uint16_t kMinPeakDistance = 100;
+static const CGSize kImageSize = { 256, 256 };
 
 #pragma mark - Public
 
 - (NSArray *)dominantColorsInImage:(UIImage *)image
 {
-    return [self referenceFunctionWithImage:image];
+    bzero(_histogram, MAX_COLORS * sizeof(_histogram[0]));
+
+    UIImage *resampledImage = [self resizedImageFromImage:image];
+    size_t bytesPerRow = CGImageGetBytesPerRow(resampledImage.CGImage);
+    size_t width = CGImageGetWidth(resampledImage.CGImage);
+    size_t height = CGImageGetHeight(resampledImage.CGImage);
+    CGDataProviderRef dataProvider = CGImageGetDataProvider(resampledImage.CGImage);
+
+    // image data will be in BGRA
+    NSData *data = CFBridgingRelease(CGDataProviderCopyData(dataProvider));
+
+    return [self referenceFunctionWithData:data width:width height:height bytesPerRow:bytesPerRow];
 }
 
 #pragma mark - Private
 
-- (NSArray *)referenceFunctionWithImage:(UIImage *)image
+- (UIImage *)resizedImageFromImage:(UIImage *)image
 {
-    size_t bytesPerRow = CGImageGetBytesPerRow(image.CGImage);
-    size_t bytesPerPixel = CGImageGetBitsPerPixel(image.CGImage) / 8;
-    size_t width = CGImageGetWidth(image.CGImage);
-    size_t height = CGImageGetHeight(image.CGImage);
+    UIGraphicsBeginImageContextWithOptions(kImageSize, YES, 1);
+    [image drawInRect:CGRectMake(0, 0, kImageSize.width, kImageSize.height)];
+    UIImage *resampledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 
-    CGDataProviderRef dataProvider = CGImageGetDataProvider(image.CGImage);
-    NSData *data = CFBridgingRelease(CGDataProviderCopyData(dataProvider));
+    return resampledImage;
+}
 
+- (NSArray *)referenceFunctionWithData:(NSData *)imageData width:(size_t)width height:(size_t)height bytesPerRow:(size_t)bytesPerRow
+{
     for (size_t h = 0; h < height; h++) {
-        uint8_t *pixel = (uint8_t *)([data bytes] + h * bytesPerRow);
+        uint8_t *pixel = (uint8_t *)([imageData bytes] + h * bytesPerRow);
 
         for (size_t w = 0; w < width; w++) {
             const uint16_t mask = 0xf0;
-            uint16_t r = pixel[0] & mask;
+            uint16_t b = pixel[0];
             uint16_t g = pixel[1] & mask;
-            uint16_t b = pixel[2];
+            uint16_t r = pixel[2] & mask;
             uint16_t index =  (r << 4) + (g << 0) + (b >> 4);
             _histogram[index]++;
 
-            pixel += bytesPerPixel;
+            pixel += 4;
         }
     }
 
@@ -50,11 +64,12 @@ static const uint16_t kMinPeakDistance = 50;
 
 - (NSArray *)dominantColorsInHistogram:(uint16_t *)histogram length:(uint16_t)length
 {
-    uint16_t maxInd = [self biggestIndexInHistogram:histogram range:NSMakeRange(0, length)];
+    NSRange range = NSMakeRange(0, length);
+    uint16_t maxInd = [self biggestIndexInHistogram:histogram range:range];
     uint16_t leftInd = maxInd > kMinPeakDistance ? maxInd - kMinPeakDistance : 0;
     uint16_t rightInd = maxInd + kMinPeakDistance < length ? maxInd + kMinPeakDistance : length - 1;
     bzero(&histogram[leftInd], (rightInd - leftInd) * sizeof(histogram[0]));
-    uint16_t secondMax = [self biggestIndexInHistogram:histogram range:NSMakeRange(0, length)];
+    uint16_t secondMax = [self biggestIndexInHistogram:histogram range:range];
 
     return @[ [self colorFromIndex:maxInd], [self colorFromIndex:secondMax] ];
 }

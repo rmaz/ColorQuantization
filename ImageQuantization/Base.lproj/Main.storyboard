@@ -19,40 +19,52 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UA7-y0-tWN" customClass="OBGradientView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baboon" translatesAutoresizingMaskIntoConstraints="NO" id="4te-m7-qfd">
-                                        <rect key="frame" x="172" y="172" width="256" height="256"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="256" id="6S0-qx-92E"/>
-                                            <constraint firstAttribute="width" constant="256" id="t2G-x0-3zw"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="4te-m7-qfd" secondAttribute="centerY" id="2SW-xx-hef"/>
-                                    <constraint firstAttribute="centerX" secondItem="4te-m7-qfd" secondAttribute="centerX" id="eK4-RJ-43S"/>
-                                </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="babboon" translatesAutoresizingMaskIntoConstraints="NO" id="4te-m7-qfd">
+                                <rect key="frame" x="172" y="172" width="256" height="256"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="6S0-qx-92E"/>
+                                    <constraint firstAttribute="width" constant="256" id="t2G-x0-3zw"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLk-hG-yKu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="imageButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ndp-5T-3dt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="4te-m7-qfd" secondAttribute="centerX" id="87y-f9-91A"/>
                             <constraint firstAttribute="trailing" secondItem="UA7-y0-tWN" secondAttribute="trailing" id="Oe9-oa-51x"/>
                             <constraint firstItem="UA7-y0-tWN" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="PxV-vv-JAu"/>
+                            <constraint firstAttribute="trailing" secondItem="WLk-hG-yKu" secondAttribute="trailing" id="QcL-wh-G4x"/>
+                            <constraint firstItem="WLk-hG-yKu" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Scp-BJ-ZGS"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="WLk-hG-yKu" secondAttribute="bottom" id="W7B-0d-HtQ"/>
+                            <constraint firstItem="WLk-hG-yKu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="e5i-7h-qce"/>
                             <constraint firstItem="UA7-y0-tWN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="eUW-O2-5Ee"/>
+                            <constraint firstAttribute="centerY" secondItem="4te-m7-qfd" secondAttribute="centerY" id="hmr-3B-hXR"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="UA7-y0-tWN" secondAttribute="bottom" id="wf2-G4-hbV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="gradientView" destination="UA7-y0-tWN" id="cON-0P-FkS"/>
                         <outlet property="imageView" destination="4te-m7-qfd" id="nLz-aB-OdF"/>
+                        <outlet property="quantizer" destination="rmk-Pd-uGx" id="DGs-75-ewQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <customObject id="rmk-Pd-uGx" customClass="ColorQuantizer"/>
             </objects>
+            <point key="canvasLocation" x="420" y="485"/>
         </scene>
     </scenes>
     <resources>
-        <image name="baboon" width="512" height="512"/>
+        <image name="babboon" width="512" height="512"/>
     </resources>
 </document>
