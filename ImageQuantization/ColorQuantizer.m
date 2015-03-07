@@ -11,6 +11,11 @@ static const uint16_t kMaxColors = 0x1000;
 static const uint16_t kMinPeakDistance = 100;
 static const CGSize kImageSize = { 256, 256 };
 
+#define PACK_PIXEL(bytePtr) ( ((uint16_t)(bytePtr[2] & 0xf0) << 4) + (bytePtr[1] & 0xf0) + (bytePtr[0] >> 4) )
+#define UNPACK_RED(index)   ((index & 0xf00) >> 4)
+#define UNPACK_GREEN(index) (index & 0xf0)
+#define UNPACK_BLUE(index)  ((index & 0x0f) << 4)
+
 #pragma mark - Init
 
 - (id)init
@@ -63,13 +68,7 @@ static const CGSize kImageSize = { 256, 256 };
         uint8_t *pixel = (uint8_t *)([imageData bytes] + h * bytesPerRow);
 
         for (size_t w = 0; w < width; w++) {
-            const uint16_t mask = 0xf0;
-            uint16_t b = pixel[0];
-            uint16_t g = pixel[1] & mask;
-            uint16_t r = pixel[2] & mask;
-            uint16_t index =  (r << 4) + (g << 0) + (b >> 4);
-            _histogram[index]++;
-
+            _histogram[PACK_PIXEL(pixel)]++;
             pixel += 4;
         }
     }
@@ -104,10 +103,7 @@ static const CGSize kImageSize = { 256, 256 };
 
 - (UIColor *)colorFromIndex:(uint16_t)index
 {
-    uint16_t b = (index & 0x0f) << 4;
-    uint16_t g = (index & 0xf0) >> 0;
-    uint16_t r = (index & 0xf00) >> 4;
-    return [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:1];
+    return [UIColor colorWithRed:UNPACK_RED(index) / 255.0 green:UNPACK_GREEN(index) / 255.0 blue:UNPACK_BLUE(index) / 255.0 alpha:1];
 }
 
 @end
