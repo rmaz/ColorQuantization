@@ -1,23 +1,36 @@
 #import "ColorQuantizer.h"
 
-#define MAX_COLORS 0x1000
-
 @implementation ColorQuantizer
 {
-    uint16_t _histogram[MAX_COLORS];
+    uint16_t *_histogram;
 }
 
 #pragma mark - Constants
 
+static const uint16_t kMaxColors = 0x1000;
 static const uint16_t kMinPeakDistance = 100;
 static const CGSize kImageSize = { 256, 256 };
+
+#pragma mark - Init
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _histogram = malloc(kMaxColors * sizeof(uint16_t));
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    free(_histogram);
+}
 
 #pragma mark - Public
 
 - (NSArray *)dominantColorsInImage:(UIImage *)image
 {
-    bzero(_histogram, MAX_COLORS * sizeof(_histogram[0]));
-
     UIImage *resampledImage = [self resizedImageFromImage:image];
     size_t bytesPerRow = CGImageGetBytesPerRow(resampledImage.CGImage);
     size_t width = CGImageGetWidth(resampledImage.CGImage);
@@ -44,6 +57,8 @@ static const CGSize kImageSize = { 256, 256 };
 
 - (NSArray *)referenceFunctionWithData:(NSData *)imageData width:(size_t)width height:(size_t)height bytesPerRow:(size_t)bytesPerRow
 {
+    bzero(_histogram, kMaxColors * sizeof(_histogram[0]));
+
     for (size_t h = 0; h < height; h++) {
         uint8_t *pixel = (uint8_t *)([imageData bytes] + h * bytesPerRow);
 
@@ -59,7 +74,7 @@ static const CGSize kImageSize = { 256, 256 };
         }
     }
 
-    return [self dominantColorsInHistogram:_histogram length:MAX_COLORS];
+    return [self dominantColorsInHistogram:_histogram length:kMaxColors];
 }
 
 - (NSArray *)dominantColorsInHistogram:(uint16_t *)histogram length:(uint16_t)length
