@@ -1,4 +1,5 @@
 #import "ColorQuantizer.h"
+#import <ImageIO/ImageIO.h>
 
 @implementation ColorQuantizer
 {
@@ -12,10 +13,9 @@ static const int kMinPeakDistance = 50;
 static const int kMinEdgeDistance = 50;
 static const CGSize kImageSize = { 256, 256 };
 
-#define PACK_PIXEL(bytePtr) ( ((uint16_t)(bytePtr[2] & 0xf0) << 4) + (bytePtr[1] & 0xf0) + (bytePtr[0] >> 4) )
-#define UNPACK_RED(index)   ((index & 0x0f00) >> 4)
-#define UNPACK_GREEN(index)  (index & 0x00f0)
-#define UNPACK_BLUE(index)  ((index & 0x000f) << 4)
+#define UNPACK_BLUE(index) ((index & 0x0f00) >> 4)
+#define UNPACK_GREEN(index) (index & 0x00f0)
+#define UNPACK_RED(index)  ((index & 0x000f) << 4)
 
 #pragma mark - Init
 
@@ -37,44 +37,52 @@ static const CGSize kImageSize = { 256, 256 };
 
 - (NSArray *)dominantColorsInImage:(UIImage *)image
 {
-    UIImage *resampledImage = [self resizedImageFromImage:image];
-    size_t bytesPerRow = CGImageGetBytesPerRow(resampledImage.CGImage);
-    size_t width = CGImageGetWidth(resampledImage.CGImage);
-    size_t height = CGImageGetHeight(resampledImage.CGImage);
-    CGDataProviderRef dataProvider = CGImageGetDataProvider(resampledImage.CGImage);
+    CFAbsoluteTime t1 = CFAbsoluteTimeGetCurrent();
+    NSData *imageData = [self scaledImageDataFromImage:image size:kImageSize];
+    CFAbsoluteTime t2 = CFAbsoluteTimeGetCurrent();
+    NSLog(@"resampling time %.0f ms", 1000*(t2 - t1));
 
-    // image data will be in BGRA
-    NSData *data = CFBridgingRelease(CGDataProviderCopyData(dataProvider));
+    t1 = CFAbsoluteTimeGetCurrent();
+    [self calculateHistogramWithImageData:imageData length:kImageSize.width * kImageSize.height];
+    t2 = CFAbsoluteTimeGetCurrent();
+    NSLog(@"histogram calculation took %.3f ms\n", 1000*(t2-t1));
 
-    return [self referenceFunctionWithData:data width:width height:height bytesPerRow:bytesPerRow];
+    t1 = CFAbsoluteTimeGetCurrent();
+    NSArray *colors = [self dominantColorsInHistogram:_histogram length:kMaxColors];
+    t2 = CFAbsoluteTimeGetCurrent();
+    NSLog(@"peak detection took %.3f ms", 1000*(t2-t1));
+
+    return colors;
 }
 
 #pragma mark - Private
 
-- (UIImage *)resizedImageFromImage:(UIImage *)image
+- (NSData *)scaledImageDataFromImage:(UIImage *)image size:(CGSize)size
 {
-    UIGraphicsBeginImageContextWithOptions(kImageSize, YES, 1);
-    [image drawInRect:CGRectMake(0, 0, kImageSize.width, kImageSize.height)];
-    UIImage *resampledImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    NSUInteger length = 4 * size.width * size.height;
+    void *data = malloc(length);
 
-    return resampledImage;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef ctx = CGBitmapContextCreate(data, size.width, size.height, 8, size.width * 4, colorSpace,
+                                             kCGBitmapByteOrderDefault | kCGImageAlphaNoneSkipLast);
+    CGContextDrawImage(ctx, CGRectMake(0, 0, size.width, size.height), image.CGImage);
+    CGContextRelease(ctx);
+    CGColorSpaceRelease(colorSpace);
+
+    return [[NSData alloc] initWithBytesNoCopy:data length:length];
 }
 
-- (NSArray *)referenceFunctionWithData:(NSData *)imageData width:(size_t)width height:(size_t)height bytesPerRow:(size_t)bytesPerRow
+- (void)calculateHistogramWithImageData:(NSData *)imageData length:(size_t)length
 {
     bzero(_histogram, kMaxColors * sizeof(_histogram[0]));
 
-    for (size_t h = 0; h < height; h++) {
-        uint8_t *pixel = (uint8_t *)([imageData bytes] + h * bytesPerRow);
-
-        for (size_t w = 0; w < width; w++) {
-            _histogram[PACK_PIXEL(pixel)]++;
-            pixel += 4;
-        }
+    uint32_t *pixel = (uint32_t *)imageData.bytes;
+    for (size_t i = 0; i < length; i++) {
+        uint32_t value = *pixel;
+        uint16_t index = ((value & 0xf00000) >> 12) + ((value & 0xf000) >> 8) + ((value & 0xf0) >> 4);
+        _histogram[index]++;
+        pixel++;
     }
-
-    return [self dominantColorsInHistogram:_histogram length:kMaxColors];
 }
 
 - (NSArray *)dominantColorsInHistogram:(uint16_t *)histogram length:(uint16_t)length
