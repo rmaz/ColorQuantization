@@ -76,15 +76,11 @@ static const CGSize kImageSize = { 256, 256 };
 {
     bzero(_histogram, kMaxColors * sizeof(_histogram[0]));
 
-    NSUInteger *pixel = (NSUInteger *)imageData.bytes;
-    for (size_t i = 0; i < [imageData length]; i += sizeof(NSUInteger)) {
-
-        for (int p = 0; p < sizeof(NSUInteger) / sizeof(uint16_t); p++) {
-            NSUInteger value = *pixel >> (p * 16);
-            uint16_t index = ((value & 0x7800) >> 3) | ((value & 0x3c0) >> 2) | ((value & 0x1e) >> 1);
-            _histogram[index]++;
-        }
-        pixel++;
+    uint16_t *pixel = (uint16_t *)imageData.bytes;
+    for (size_t i = 0; i < [imageData length]; i += sizeof(uint16_t)) {
+        uint16_t value = *pixel++;
+        uint16_t index = ((value & 0x7800) >> 3) | ((value & 0x3c0) >> 2) | ((value & 0x1e) >> 1);
+        _histogram[index]++;
     }
 }
 
